@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
+
+    <title>Cardoor - Car Rental HTML Template</title>
+
+    <!--=== Bootstrap CSS ===-->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!--=== Slicknav CSS ===-->
+    <link href="{% static 'css/plugins/slicknav.min.css' %}" rel="stylesheet">
+    <!--=== Magnific Popup CSS ===-->
+    <link href="{% static 'css/plugins/magnific-popup.css' %}" rel="stylesheet">
+    <!--=== Owl Carousel CSS ===-->
+    <link href="{% static 'css/plugins/owl.carousel.min.css' %}" rel="stylesheet">
+    <!--=== Gijgo CSS ===-->
+    <link href="{% static 'css/plugins/gijgo.css' %}" rel="stylesheet">
+    <!--=== FontAwesome CSS ===-->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <!--=== Theme Reset CSS ===-->
+    <link href="{% static 'css/reset.css' %}" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!--=== Responsive CSS ===-->
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+
+
+</head>
+
+<body class="loader-active">
+
+    <!--== Preloader Area Start ==-->
+    <div class="preloader">
+        <div class="preloader-spinner">
+            <div class="loader-content">
+                <img src="{% static 'img/preloader.gif' %}" alt="JSOFT">
+            </div>
+        </div>
+    </div>
+    <!--== Preloader Area End ==-->
+
+    <!--== Header Area Start ==-->
+    <header id="header-area" class="fixed-top">
+
+        <!--== Header Bottom Start ==-->
+        <div id="header-bottom">
+            <div class="container">
+                <div class="row">
+                    <!--== Logo Start ==-->
+                    <div class="col-lg-4">
+                        <a href="index.html" class="logo">
+                            <img src="{% static 'img/logo.png' %}" alt="JSOFT">
+                        </a>
+                    </div>
+                    <!--== Logo End ==-->
+
+                   <!--== Main Menu Start ==-->
+                    <div class="col-lg-8 d-none d-xl-block">
+                        <nav class="mainmenu alignright">
+                            <ul>
+                                <li><a href="">Home</a></li>
+                                <li><a href="/services">services</a></li>
+                                <li class="active"><a href="#">Cars</a></li>
+                                <li><a href="/faq">FAQ</a></li>
+                                <li><a href="/about">About</a></li>
+                                <li><a href="/contact">Contact</a></li>
+                                <li class="dropdown"> <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> Account</a>
+                                    <ul>                                        
+                                        <li><a href="login.html">login</a></li>
+                                        <li><a href="register.html">Register</a></li>
+                                        <li><a href="#">Sign Out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                        
+                    </div>
+                    <!--== Main Menu End ==-->
+                </div>
+            </div>
+        </div>
+        <!--== Header Bottom End ==-->
+    </header>
+    <!--== Header Area End ==-->
+
+    <!--== Car List Area Start ==-->
+    <section id="car-list-area" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <!-- Car List Content Start -->
+                <div class="col-lg-12">
+                    <div class="car-list-content">
+                        <div class="row">
+
+                        <!--creating a for loop for the car details being fetched from the database-->
+
+                        {%for display_car in display_cars %}
+
+                            <!-- Single Car Start -->
+                            <div class="col-lg-6 col-md-6">
+                                <div class="single-car-wrap">
+                                    <div class="car-list-thumb" style = "background-image: url({{display_car.car_image.url}})"></div>
+                                    <div class="car-list-info without-bar">
+                                        <h2><a href="#">{{display_car.get_car_name_display}}</a></h2>
+                                        <h5>{{display_car.price}} Ugx Rent per day</h5>
+                                        <p>{{display_car.description}}</p>
+                                        <ul class="car-info-list">
+                                            <li>{{display_car.ac_availability}}</li>
+                                         <!--This is how we display our human readable choices in our front end template. We use the get_FOO_display
+                                         method-->
+                                            <li>{{display_car.get_engine_type_display}}</li>
+                                            <li>{{display_car.get_transmission_display}}</li>
+                                        </ul>
+                                        <p class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star unmark"></i>
+                                        </p>
+                                        <a href="#" class="rent-btn">Book It</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single Car End -->
+
+                            {% endfor %} <!--end for loop-->
+
+                        </div>
+                    </div>
+
+                    <!-- Page Pagination Start -->
+                    <div class="page-pagi">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- Page Pagination End -->
+                </div>
+                <!-- Car List Content End -->
+            </div>
+        </div>
+    </section>
+    <!--== Car List Area End ==-->
+
+    <!--== Footer Area Start ==-->
+    <section id="footer-area">
+        <!-- Footer Widget Start -->
+        <div class="footer-widget-area">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Single Footer Widget Start -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-footer-widget">
+                            <h2>get in touch</h2>
+                            <div class="widget-body">
+                                <p>You can find us at our offices or call the number below</p>
+
+                                <ul class="get-touch">
+                                    <li><i class="fa fa-map-marker"></i> Plot 4664 Block 244
+                                                                        AD House, First Floor
+                                        Muyenga Road, Kampala Uganda</li>
+                                    <li><i class="fa fa-mobile"></i> +256777905629</li>
+                                    <li><i class="fa fa-envelope"></i> kibazojonathan@gmail.com</li>
+                                    <li><i class="fa fa-clock-o"></i> Mon-Fri 09:00 am - 05:00 pm</li>
+                                </ul>
+                                <a href="https://goo.gl/maps/sL3ABwKhpUGSKMaD6" class="map-show" target="_blank">Show Location</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Footer Widget End -->
+                </div>
+            </div>
+        </div>
+        <!-- Footer Widget End -->
+
+        <!-- Footer Bottom Start -->
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This system was developed by <i class="fa fa-heart-o" aria-hidden="true"></i><a href="https://www.linkedin.com/in/jonathan-kibazo-023b61167" target="_blank"> Jonathan Kibazo</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom End -->
+    </section>
+    <!--== Footer Area End ==-->
+
+    <!--== Scroll Top Area Start ==-->
+    <div class="scroll-top">
+        <img src="{% static 'img/scroll-top.png' %}" alt="JSOFT">
+    </div>
+    <!--== Scroll Top Area End ==-->
+
+    <!--=======================Javascript============================-->
+    <!--=== Jquery Min Js ===-->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <!--=== Jquery Migrate Min Js ===-->
+    <script src="{% static 'js/jquery-migrate.min.js' %}"></script>
+    <!--=== Popper Min Js ===-->
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <!--=== Bootstrap Min Js ===-->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!--=== Gijgo Min Js ===-->
+    <script src="{% static 'js/plugins/gijgo.js' %}"></script>
+    <!--=== Vegas Min Js ===-->
+    <script src="{% static 'js/plugins/vegas.min.js' %}"></script>
+    <!--=== Isotope Min Js ===-->
+    <script src="{% static 'js/plugins/isotope.min.js' %}"></script>
+    <!--=== Owl Caousel Min Js ===-->
+    <script src="{% static 'js/plugins/owl.carousel.min.js' %}"></script>
+    <!--=== Waypoint Min Js ===-->
+    <script src="{% static 'js/plugins/waypoints.min.js' %}"></script>
+    <!--=== CounTotop Min Js ===-->
+    <script src="{% static 'js/plugins/counterup.min.js' %}"></script>
+    <!--=== YtPlayer Min Js ===-->
+    <script src="{% static 'js/plugins/mb.YTPlayer.js' %}"></script>
+    <!--=== Magnific Popup Min Js ===-->
+    <script src="{% static 'js/plugins/magnific-popup.min.js' %}"></script>
+    <!--=== Slicknav Min Js ===-->
+    <script src="{% static 'js/plugins/slicknav.min.js' %}"></script>
+
+    <!--=== Mian Js ===-->
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
